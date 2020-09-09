@@ -1,0 +1,13 @@
+.small-img {
+    width: 50px;
+}
+
+.mat-form-field {
+    width: 200px;
+}
+
+@media (max-width: 576px) {
+    .mat-form-field {
+        width: 80px;
+    }
+}

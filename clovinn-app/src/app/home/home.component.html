@@ -1,0 +1,45 @@
+<div class="page-back">
+    <div class="text-right button-wrapper">
+        <button class="btn-primary" mat-button (click)="goToAdmin()">Administrar</button>
+        <button class="btn-primary" mat-button (click)="goToAdd()">Agregar Productos</button>
+    </div>
+
+    <div class="container">
+        <div class="row m-0">
+            <div class="col-12 col-sm-3 prod-container" *ngFor="let p of prodList">
+                <div class="product">
+                    <div class="d-flex justify-content-center title-wrapper">
+                        <h2 class="align-self-center">{{ p.name }}</h2>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="{{ p.image }}" />
+                    </div>
+                    <h2>${{ p.price }}</h2>
+                    <div *ngIf="p.stock > 0">Disponibles: {{ p.stock }}</div>
+                    <div *ngIf="p.stock > 0" class="row m-1 mt-25">
+                        <div class="col-6 p-0 align-self-center">
+                            <mat-form-field class="w-100">
+                                <mat-label>Cantidad</mat-label>
+                                <input type="number" [(ngModel)]="p.buyAmmount" matInput />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 p-0 align-self-center">
+                            <button class="btn-primary w-100" [disabled]="disabledToBuy(p)" (click)="buy(p)" mat-button>
+                                Comprar
+                            </button>
+                        </div>
+                    </div>
+                    <p class="red" *ngIf="p.buyAmmount > 0 && p.buyAmmount > p.stock && p.stock > 0">
+                        No tenemos tanto stock!
+                    </p>
+                    <div *ngIf="p.stock < 1" class="row stock-wrapper">
+                        <div class="col-12 d-flex justify-content-center align-self-center">
+                            No hay stock
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <mat-paginator [pageSizeOptions]="size" (page)="changePage($event)" [length]="length" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

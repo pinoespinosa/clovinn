@@ -1,0 +1,60 @@
+<div class="text-right button-wrapper">
+    <button class="btn-primary" mat-button (click)="goToHome()">
+    Inicio
+  </button>
+    <button class="btn-primary" mat-button (click)="goToAdmin()">
+    Administrar
+  </button>
+</div>
+
+
+<div class="container">
+    <h1>Agregar Producto</h1>
+
+    <div class="row">
+
+        <div class="col-6">
+
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Complete el nombre del producto</div>
+                        <div *ngIf="f.name.errors.maxlength || f.name.errors.minlength">El campo debe ser entre 0 y 250 letras</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Image Url</label>
+                    <input type="text" formControlName="image" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" />
+                    <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+                        <div *ngIf="f.image.errors.required">Complete el campo imagen</div>
+                        <div *ngIf="f.image.errors.maxlength || f.image.errors.minlength">El campo debe ser entre 0 y 250 letras</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Stock</label>
+                    <input type="number" formControlName="stock" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.stock.errors }" />
+                    <div *ngIf="submitted && f.stock.errors" class="invalid-feedback">
+                        <div *ngIf="f.stock.errors.required">Complete el campo Stock</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="number" formControlName="price" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.price.errors }" />
+                    <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                        <div *ngIf="f.price.errors.required">Complete el campo Price</div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button class="btn btn-primary mr-1">{{productId ? "Editar Producto" : "Crear Producto"}}</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <div class="picture" [style.backgroundImage]="'url('+ f.image.value +')'"></div>
+        </div>
+
+    </div>
